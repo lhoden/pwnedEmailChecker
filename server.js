@@ -7,7 +7,6 @@ const app = express()
 
 var json = []
 var errorReply = ''
-var port = process.env.PORT || 8080;
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -53,4 +52,4 @@ app.post('/login', urlencodedParser, (req, res) => {
     });
 })   
 
-app.listen(3000)
+app.listen(process.PORT || 5000)
