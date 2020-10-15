@@ -1,0 +1,7 @@
+{
+"name": "Node.js app leveraging haveibeenpwned",
+"description": "A Node.js app using Express",
+"repository": "https://git.heroku.com/haveibeenpwned-demo.git",
+"keywords": ["node", "express", "haveibeenpwned"],
+"image": "heroku/nodejs"
+}
