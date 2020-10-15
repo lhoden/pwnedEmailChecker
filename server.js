@@ -52,4 +52,4 @@ app.post('/login', urlencodedParser, (req, res) => {
     });
 })   
 
-app.listen(process.PORT || 5000)
+app.listen(process.env.PORT || 5000)
