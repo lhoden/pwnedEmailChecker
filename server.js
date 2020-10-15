@@ -7,6 +7,7 @@ const app = express()
 
 var json = []
 var errorReply = ''
+var port = process.env.PORT || 8080;
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
