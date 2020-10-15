@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" href="css/form_layout.css">
+    </head>
+    <body>
+      <div class="form-result">
+        <div class="breach-box">
+        <h2>Breaches Report</h2>
+        <input type="text" id="searchInput" onkeyup="searchBreaches()" placeholder="Search..." title="Search for breaches">
+        <p class="nav"><a href="login">Check another email</a></p>
+        </div>
+        <table id="breachTable"> 
+            <th></th>
+          <% for (var i = 0; i < values.length; i++) { %>
+            <tr>
+               <td><%= values[i].substr(9, values[i].length - 11) %></td>
+            </tr>
+         <% } %>
+        </table>
+        <p><%= errors %></p>
+      </div>  
+  <script>
+    function searchBreaches() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("breachTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+  </script>
+</body>
+</html>
