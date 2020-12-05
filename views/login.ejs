@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html>
-    <head>
-      <link rel="stylesheet" href="css/form_layout.css">
-    </head>
-    <body>
-        <div class="email-page">
-            <div class="form">
-              <form class="login-form" action="/login" method="POST">
-                <input type="email" id="email" name="email" placeholder="email" required>
-                <button>check email</button>
-                <p class="message">Find out more at <a href="https://haveibeenpwned.com/">haveibeenpwned?</a></p>
-              </form>
-            </div>
-        </div>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Responsive Login Page</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <section>
+    <div class="imgBox">
+      <img src="img/hacking.jpg">
+    </div>
+    <div class="contentBox">
+      <div class="formBox">
+        <h2>Have I been pwned?</h2>
+        <form class="login-form" action="/login" method="POST">
+          <div class="inputBox">
+            <span>Email</span>
+            <input type="email" id="email" name="email" placeholder="email@example.com" required>
+          </div>
+          <div class="inputBox">
+            <input type="submit" value="Check" name="">
+          </div>
+        </form>
+        <h3>Login with social media</h3>
+        <ul class="sci">
+          <li><a href="#"><img src="img/facebook.jpg"></a></li>
+          <li><a href="#"><img src="img/twitter.png"></a></li>
+          <li><a href="#"><img src="img/instagram.png"></a></li>
+        </ul>
+      </div>
+    </div>
+</body>
 </html>

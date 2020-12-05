@@ -1,26 +1,111 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <link rel="stylesheet" href="css/form_layout.css">
+      <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body id="breaches-background">
+      <form action="login">
+        <input id="backButton" type="submit" value="Check another email"/>
+      </form>
       <div class="form-result">
-        <div class="breach-box">
-        <h2>Breaches Report</h2>
-        <input type="text" id="searchInput" onkeyup="searchBreaches()" placeholder="Search..." title="Search for breaches">
-        <p class="nav"><a href="login">Check another email</a></p>
+        <img id="breachIcon" src="img/siren.png">
+        <h2 id="title">Breach Alert</h2>
+        <div class="advice">
+          <button class="accordion" id="numberOfBreaches">Section 1</button>
+            <div class="panel">
+              <div class="breach-box">
+                <input type="text" id="searchInput" onkeyup="searchBreaches()" placeholder="Search for breaches..." title="Search for breaches">
+                <table id="breachTable"> 
+                    <th></th>
+                  <% for (var i = 0; i < values.length; i++) { %>
+                    <tr>
+                      <td><%= values[i].substr(9, values[i].length - 11) %></td>
+                    </tr>
+                  <% } %>
+                </table>
+                <p><%= errors %></p>
+              </div>
+            </div>
+            <div id="advicePwned">
+              <h3>What should I do if I've been pwned?</h3>
+              <br/>
+              <p>If your email has been pwned, it means that the security of your account has been compromised.
+                Hacking an account using your email address is possibly the first step of identity theft. Here are three things you should
+                do if your email has been pwned:
+              </p>
+              <br/>
+              <br/>
+              <table>
+                <th></th>
+                <tr>
+                  <td>1. Update your antivirus and OS
+                    <br>
+                    <img src="img/updateOS.png">
+                  </td>
+                  <td>2. Scan your device for malware
+                    <br>
+                    <img src="img/antivirus.png">
+                  </td>
+                  <td>3. Now, change your passwords
+                    <br>
+                    <img src="img/securePW.png">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div id="adviceSafe">
+              <h3>How can I avoid being pwned?</h3>
+              <br/>
+              <p>Discovering that your password or email have been leaked online and shared by cybercriminals 
+                is no fun. Fortunately, there are many things you can do to avoid getting pwned. Here are additional steps you can 
+                take to maintain security:
+              </p>
+              <br/>
+              <br/>
+              <table>
+                <th></th>
+                <tr>
+                  <td>1. Don't use the same password repeatedly
+                    <br>
+                    <img src="img/password.png">
+                  </td>
+                  <td>2. Enable 2-factor authentication
+                    <br>
+                    <img src="img/2FA.png">
+                  </td>
+                  <td>3. Change passwords regularly
+                    <br>
+                    <img src="img/changepw.png">
+                  </td>
+                </tr>
+              </table>
+            </div>
         </div>
-        <table id="breachTable"> 
-            <th></th>
-          <% for (var i = 0; i < values.length; i++) { %>
-            <tr>
-               <td><%= values[i].substr(9, values[i].length - 11) %></td>
-            </tr>
-         <% } %>
-        </table>
-        <p><%= errors %></p>
       </div>  
   <script>
+    // counts number of breaches by adding up number of rows in table
+    var rowCount = document.getElementById('breachTable').rows.length - 1;
+    var output = document.getElementById('numberOfBreaches');
+    getOutput()
+    //hides content according to the number of breaches recorded in table
+    if (rowCount < 2) {
+      document.getElementById('breachIcon').src='img/check.png'
+      document.getElementById('title').innerHTML='Great news!'
+      myFunction()
+    }
+    // hides search bar and number of breaches if no breaches are found
+    function myFunction() {
+      document.getElementById("searchInput").style.display = "none";
+      document.getElementById('numberOfBreaches').style.display = "none";
+      document.getElementById("advicePwned").style.display = "none";
+      document.getElementById("adviceSafe").style.display = "block";
+      document.getElementById("backButton").style.background = "#00DF76";
+    }
+    // outputs the number of breaches as innerHTML
+    function getOutput() {
+      output.innerHTML = rowCount + " breaches found"
+    }
+    // search function
     function searchBreaches() {
       var input, filter, table, tr, td, i, txtValue;
       input = document.getElementById("searchInput");
@@ -38,6 +123,26 @@
           }
         }       
       }
+    }
+    // Creates accordion layout
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    var background = document.getElementById("breaches-background");
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+          background.style.display = "100vh"; // retracts background gradient expansion
+          background.style.overflow = "hidden";
+        } else {
+          panel.style.display = "block";
+          background.style.height = "200vh"; // expands background gradient length
+          background.style.overflow = "visible";
+        }
+      });
     }
   </script>
 </body>
