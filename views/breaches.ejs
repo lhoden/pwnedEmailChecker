@@ -2,6 +2,7 @@
 <html>
     <head>
       <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body id="breaches-background">
       <form action="login">
@@ -11,21 +12,6 @@
         <img id="breachIcon" src="img/siren.png">
         <h2 id="title">Breach Alert</h2>
         <div class="advice">
-          <button class="accordion" id="numberOfBreaches">Section 1</button>
-            <div class="panel">
-              <div class="breach-box">
-                <input type="text" id="searchInput" onkeyup="searchBreaches()" placeholder="Search for breaches..." title="Search for breaches">
-                <table id="breachTable"> 
-                    <th></th>
-                  <% for (var i = 0; i < values.length; i++) { %>
-                    <tr>
-                      <td><%= values[i].substr(9, values[i].length - 11) %></td>
-                    </tr>
-                  <% } %>
-                </table>
-                <p><%= errors %></p>
-              </div>
-            </div>
             <div id="advicePwned">
               <h3>What should I do if I've been pwned?</h3>
               <br/>
@@ -52,7 +38,25 @@
                   </td>
                 </tr>
               </table>
+
+              <p class="breachSection">
+                <button class="btn btn-primary" style="background: #FF5E57; border-color: #FF5E57;" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Compromised Accounts
+                </button>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  <div class="breach-box" id="breaches">
+                      <% for (var i = 0; i < values.length; i++) { %>
+                        <span><%= values[i].substr(9, values[i].length - 11) %></span>
+                      <% } %>
+                    </table>
+                    <p><%= errors %></p>
+                  </div>
+                </div>
+              </div>
             </div>
+            
             <div id="adviceSafe">
               <h3>How can I avoid being pwned?</h3>
               <br/>
@@ -84,27 +88,16 @@
       </div>  
   <script>
     // counts number of breaches by adding up number of rows in table
-    var rowCount = document.getElementById('breachTable').rows.length - 1;
-    var output = document.getElementById('numberOfBreaches');
-    getOutput()
+    var rowCount = document.getElementById('breaches').childElementCount - 1;
     //hides content according to the number of breaches recorded in table
     if (rowCount < 2) {
       document.getElementById('breachIcon').src='img/check.png'
       document.getElementById('title').innerHTML='Great news!'
-      myFunction()
-    }
-    // hides search bar and number of breaches if no breaches are found
-    function myFunction() {
-      document.getElementById("searchInput").style.display = "none";
-      document.getElementById('numberOfBreaches').style.display = "none";
       document.getElementById("advicePwned").style.display = "none";
       document.getElementById("adviceSafe").style.display = "block";
       document.getElementById("backButton").style.background = "#00DF76";
     }
-    // outputs the number of breaches as innerHTML
-    function getOutput() {
-      output.innerHTML = rowCount + " breaches found"
-    }
+
     // search function
     function searchBreaches() {
       var input, filter, table, tr, td, i, txtValue;
@@ -124,26 +117,9 @@
         }       
       }
     }
-    // Creates accordion layout
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-    var background = document.getElementById("breaches-background");
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-          background.style.display = "100vh"; // retracts background gradient expansion
-          background.style.overflow = "hidden";
-        } else {
-          panel.style.display = "block";
-          background.style.height = "200vh"; // expands background gradient length
-          background.style.overflow = "visible";
-        }
-      });
-    }
   </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

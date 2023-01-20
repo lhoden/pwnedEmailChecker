@@ -38,7 +38,6 @@ app.post('/login', urlencodedParser, (req, res) => {
         }
     })
     .then(function (response) {
-        console.log(response.data);
         errorReply = ''
         var input = JSON.stringify(response.data)
         json = input.split(",")
