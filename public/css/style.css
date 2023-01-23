@@ -144,7 +144,7 @@ section .contentBox .formBox .sci li img {
   margin-top: 7px;
 }
 
-.form-result { 
+.form-result {
   text-align: center;
 }
 
@@ -251,6 +251,7 @@ section .contentBox .formBox .sci li img {
 #adviceSafe {
   display: none;
   padding: 20px 30px 30px 20px;
+  min-width: 100%;
 }
 
 #adviceSafe table {
@@ -262,6 +263,15 @@ section .contentBox .formBox .sci li img {
   max-width: 300px;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+#adviceSafe div {
+  text-align: center;
+}
+
+#adviceSafe p {
+  margin: auto;
+  width: 80%;
 }
 
 .panel {
@@ -284,9 +294,10 @@ section .contentBox .formBox .sci li img {
 
 #breaches-background {
     background-image: url("../img/pexels-rodnae-productions-7948004.jpg");
-    background-size: 100%;
     background-repeat: no-repeat;
     font-weight: bold;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 #searchInput {
@@ -322,7 +333,7 @@ section .contentBox .formBox .sci li img {
   background: #ddd;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 850px) {
   section .imgBox {
     position: absolute;
     top: 0;
@@ -349,5 +360,16 @@ section .contentBox .formBox .sci li img {
     text-align: center;
     margin: 30px 0 10px;
     font-weight: 500;
+  }
+  .breaches-background {
+    background-size: cover !important;
+  }
+  #adviceSafe table td {
+    display: block;
+    margin-bottom: 60px;
+  }
+  #advicePwned table td {
+    display: block;
+    margin-bottom: 60px;
   }
 }
